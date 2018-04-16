@@ -21,16 +21,19 @@
             android:layout_height="wrap_content">
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem"
+                android:id="@+id/tabMenuJour"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="text1" />
+                android:text="Le menu du jour" />
 
             <android.support.design.widget.TabItem
-                android:id="@+id/tabItem2"
+                android:id="@+id/tabCategorie"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="text2" />
+                android:text="Category des menus" />
+
+
+
 
         </android.support.design.widget.TabLayout>
     </android.support.design.widget.AppBarLayout>

@@ -5,25 +5,13 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/ceRestaurant"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Ce Restaurant" />
-        <item
             android:id="@+id/restaurants"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Chercher un autre Restaurant" />
-        <item
-            android:id="@+id/lesMenus"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Les menus " />
+            android:title="Les restaurants" />
         <item
             android:id="@+id/favoriteCategories"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Categories Favorite " />
-        <item
-            android:id="@+id/reserverUnetable"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Reserver une table" />
         <item
             android:id="@+id/panier"
             android:icon="@drawable/ic_menu_slideshow"

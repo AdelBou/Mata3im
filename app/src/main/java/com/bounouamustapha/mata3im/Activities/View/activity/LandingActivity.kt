@@ -16,7 +16,7 @@ class LandingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_landing)
         startButton.setOnClickListener({view ->
-            startActivity(intentFor<RestaurantsActivity>("id" to 5).singleTop())
+            startActivity(intentFor<ListRestaurantActivity>("id" to 5).singleTop())
         })
     }
 }

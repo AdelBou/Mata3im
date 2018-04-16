@@ -7,16 +7,15 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.bounouamustapha.mata3im.Activities.Model.Plat
-import com.bounouamustapha.mata3im.Activities.Model.Restaurant
+import com.bounouamustapha.mata3im.Activities.Model.PlatUnaire
 import com.bounouamustapha.mata3im.R
 
 /**
  * Created by bounouamustapha on 4/4/18.
  */
-class PlatsAdapter (_ctx: Context,listPlats:List<Plat>): BaseAdapter() {
+class PlatsAdapter (_ctx: Context, listPlatUnaires:List<PlatUnaire>): BaseAdapter() {
     var ctx = _ctx
-    val listPlats = listPlats
+    val listPlats = listPlatUnaires
 
 
     override fun getItem(p0: Int) = listPlats.get(p0)
@@ -42,7 +41,6 @@ class PlatsAdapter (_ctx: Context,listPlats:List<Plat>): BaseAdapter() {
         viewHolder.imageList.setImageResource(listPlats.get(position).listImage)
         viewHolder.name.setText(listPlats.get(position).name)
         return view
-
     }
 
     private data class ViewHolder(var imageList: ImageView, var name: TextView)

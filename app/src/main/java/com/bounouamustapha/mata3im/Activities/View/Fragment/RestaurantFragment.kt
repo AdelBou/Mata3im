@@ -14,16 +14,21 @@ import com.bounouamustapha.mata3im.Activities.Controller.DataController
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
+import com.bounouamustapha.mata3im.Activities.View.activity.ListRestaurantActivity
+import com.bounouamustapha.mata3im.Activities.View.activity.RestaurantActivity
 
 import com.bounouamustapha.mata3im.R
 import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.*
 import kotlinx.android.synthetic.main.fragment_list_of_restaurants.*
+import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.singleTop
+import org.jetbrains.anko.support.v4.intentFor
 
 
 /**
  * A simple [Fragment] subclass.
  */
-class MainFragment : Fragment() {
+class RestaurantFragment : Fragment() {
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -63,6 +68,8 @@ class MainFragment : Fragment() {
                 restaurantModel.restaurant = loadData()[i]
                 initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
             } else {
+                startActivity(intentFor<RestaurantActivity>().singleTop())
+
                 // send the position to the detail activity
                 //  startActivity(intentFor<DetailActivity>("pos" to i))
             }
