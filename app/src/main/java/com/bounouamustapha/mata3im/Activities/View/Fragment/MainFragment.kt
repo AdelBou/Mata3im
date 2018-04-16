@@ -34,6 +34,7 @@ class MainFragment : Fragment() {
         restaurantModel.restaurant = loadData()[0]
 
         val view = inflater.inflate(R.layout.fragment_main, container, false)
+
         initialiseListRestaurentsFragment(restaurantModel, view)
         if (isTwoPane(view)) {
             initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant, view)
@@ -61,7 +62,6 @@ class MainFragment : Fragment() {
                 // display detail data
                 restaurantModel.restaurant = loadData()[i]
                 initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
-
             } else {
                 // send the position to the detail activity
                 //  startActivity(intentFor<DetailActivity>("pos" to i))

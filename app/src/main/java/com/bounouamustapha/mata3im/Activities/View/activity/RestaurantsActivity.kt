@@ -15,6 +15,7 @@ import com.bounouamustapha.mata3im.Activities.Controller.DataController
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
 import com.bounouamustapha.mata3im.Activities.View.Fragment.MainFragment
+import com.bounouamustapha.mata3im.Activities.View.Fragment.PlatesFragment
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
 import com.bounouamustapha.mata3im.R
 import com.bounouamustapha.mata3im.R.id.*
@@ -81,11 +82,13 @@ class RestaurantsActivity : AppCompatActivity(), NavigationView.OnNavigationItem
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
+        var fragmentTransaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.nav_camera -> {
-                changefrag()
+                fragmentTransaction.replace(R.id.fragment,MainFragment()).commit()
             }
             R.id.nav_gallery -> {
+                fragmentTransaction.replace(R.id.fragment,PlatesFragment()).commit()
 
             }
             R.id.nav_slideshow -> {
@@ -106,10 +109,7 @@ class RestaurantsActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         return true
     }
 
-    fun changefrag(){
-        var fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment,MainFragment()).commit()
-    }
+
 
 
 
