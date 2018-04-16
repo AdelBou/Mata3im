@@ -1,7 +1,5 @@
 package com.bounouamustapha.mata3im.Activities.View.activity
 
-import android.arch.lifecycle.ViewModelProviders
-import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -10,23 +8,17 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
-import com.bounouamustapha.mata3im.Activities.Controller.DataController
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
-import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
-import com.bounouamustapha.mata3im.Activities.View.Fragment.MainFragment
-import com.bounouamustapha.mata3im.Activities.View.Fragment.PlatesFragment
-import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
+import com.bounouamustapha.mata3im.Activities.View.Fragment.*
 import com.bounouamustapha.mata3im.R
-import com.bounouamustapha.mata3im.R.id.*
+import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.activity_restaurants.*
 import kotlinx.android.synthetic.main.app_bar_restaurants.*
-import kotlinx.android.synthetic.main.fragment_list_of_restaurants.*
-import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.*
 import org.jetbrains.anko.intentFor
+import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.toast
 
-class RestaurantsActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,20 +37,23 @@ class RestaurantsActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         }
 
         val toggle = ActionBarDrawerToggle(
-                this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+                this, drawer_layoutRestaurant, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
+        drawer_layoutRestaurant.addDrawerListener(toggle)
         toggle.syncState()
 
-        nav_view.setNavigationItemSelectedListener(this)
+        nav_viewRestaurant.setNavigationItemSelectedListener(this)
+        nav_viewRestaurant.setCheckedItem(R.id.ceRestaurant)
+        onNavigationItemSelected(nav_viewRestaurant.getMenu().getItem(0))
 
         //added by adel
+
 
 
     }
 
     override fun onBackPressed() {
-        if (drawer_layout.isDrawerOpen(GravityCompat.START)) {
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (drawer_layoutRestaurant.isDrawerOpen(GravityCompat.START)) {
+            drawer_layoutRestaurant.closeDrawer(GravityCompat.START)
         } else {
             super.onBackPressed()
         }
@@ -84,28 +79,37 @@ class RestaurantsActivity : AppCompatActivity(), NavigationView.OnNavigationItem
         // Handle navigation view item clicks here.
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
-            R.id.nav_camera -> {
-                fragmentTransaction.replace(R.id.fragment,MainFragment()).commit()
+            R.id.ceRestaurant -> {
+                fragmentTransaction.replace(R.id.fragmentRestaurants, DetailOfRestaurantFragment()).commit()
             }
-            R.id.nav_gallery -> {
-                fragmentTransaction.replace(R.id.fragment,PlatesFragment()).commit()
+            R.id.restaurants -> {
+                startActivity(intentFor<ListRestaurantActivity>("id" to 5).singleTop())
+            }
+            R.id.favoriteCategories -> {
+                fragmentTransaction.replace(R.id.fragmentRestaurants, FavouriteMenuFragment()).commit()
+            }
+            R.id.panier -> {
+                fragmentTransaction.replace(R.id.fragmentRestaurants, PanierFragment()).commit()
+            }
+            R.id.lesMenus -> {
+                fragmentTransaction.replace(R.id.lesMenus, MenusFragment()).commit()
+            }
+            R.id.reserverUnetable-> {
+                toast("reserver une table")
+            }
+            R.id.mesReservations -> {
+                fragmentTransaction.replace(R.id.fragmentRestaurants, ReservationsFragment()).commit()
+            }
+            R.id.sommeNous-> {
+                toast("I m zoubir")
+            }
+            R.id.contacter -> {
+                toast("contacter nous")
+            }
 
-            }
-            R.id.nav_slideshow -> {
-
-            }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
-
-            }
         }
 
-        drawer_layout.closeDrawer(GravityCompat.START)
+        drawer_layoutRestaurant.closeDrawer(GravityCompat.START)
         return true
     }
 
