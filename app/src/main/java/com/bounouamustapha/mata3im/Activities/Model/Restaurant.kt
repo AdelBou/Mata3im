@@ -6,8 +6,12 @@ package com.bounouamustapha.mata3im.Activities.Model
 data class Restaurant  (var listImage:Int=0,
                    var detailImage:Int=0,
                    var name:String="",
+                   var adresse:String="",
                    var description:String="",
-                   var listPlatUnaire:MutableList<PlatUnaire> = mutableListOf<PlatUnaire>()
+                        var nbJaime:Int =0,
+                        var jaime:Boolean=false,
+                   var listPlats:MutableList<Plat> = mutableListOf<Plat>()
 
-                        ) {
+                        )
+{
 }

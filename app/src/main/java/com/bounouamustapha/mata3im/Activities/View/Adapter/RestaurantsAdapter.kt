@@ -1,50 +1,75 @@
 package com.bounouamustapha.mata3im.Activities.View.Adapter
 
 import android.content.Context
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnItemClickListener
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.R
+import com.joanzapata.iconify.widget.IconTextView
+import org.jetbrains.anko.textColor
 
 /**
  * Created by bounouamustapha on 4/1/18.
  */
-class RestaurantsAdapter(_ctx: Context, listRestaurants:List<Restaurant>): BaseAdapter() {
-    var ctx = _ctx
-    val listRestaurant = listRestaurants
+class RestaurantsAdapter(var c :Context,var listRestaurants: List<Restaurant>, var listener: OnItemClickListener) : RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
 
-
-    override fun getItem(p0: Int) = listRestaurant.get(p0)
-
-    override fun getItemId(p0: Int) = listRestaurant.get(p0).hashCode().toLong()
-
-    override fun getCount()= listRestaurant.size
-
-    override fun getView(position: Int, p0: View?, parent: ViewGroup?): View {
-        var view = p0
-        var viewHolder: ViewHolder
-        if(view == null) {
-            view = LayoutInflater.from(ctx).inflate(R.layout.restaurant_item,parent,false)
-            val imageList = view?.findViewById<ImageView>(R.id.listimage) as ImageView
-            val name = view?.findViewById<TextView>(R.id.name) as TextView
-            val numberTourist = view?.findViewById<TextView>(R.id.numbertourist) as TextView
-            viewHolder= ViewHolder(imageList,name,numberTourist)
-            view.setTag(viewHolder)
-        }
-        else {
-            viewHolder = view.getTag() as ViewHolder
-
-        }
-        viewHolder.imageList.setImageResource(listRestaurant.get(position).listImage)
-        viewHolder.name.setText(listRestaurant.get(position).name)
-      //  viewHolder.numberTourist.setText("${listCities.get(position).touristNumber} de touristes par an")
-        return view
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder?.txtName?.text = listRestaurants[position].name
+        holder?.nbjaime?.text = "${listRestaurants[position].nbJaime}  "+"{fa-thumbs-up}"
+        // holder?.txtTitle?.text = listRestaurants[position].title
+        holder?.bind(c,listRestaurants.get(position), listener)
 
     }
 
-    private data class ViewHolder(var imageList: ImageView, var name: TextView, var numberTourist: TextView)
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.restaurant_item, parent, false)
+        return ViewHolder(v);
+    }
+
+    override fun getItemCount(): Int {
+        return listRestaurants.size
+    }
+
+    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val txtName = itemView.findViewById<TextView>(R.id.name)
+        val jaime = itemView.findViewById<IconTextView>(R.id.jaime)
+        val nbjaime=itemView.findViewById<IconTextView>(R.id.nbjaime)
+        val detail=itemView.findViewById<TextView>(R.id.detail)
+
+        //   val txtTitle = itemView.findViewById<TextView>(R.id.txtTitle)
+        public fun bind(c:Context,item: Restaurant, listener: OnItemClickListener) {
+
+            detail.setOnClickListener { listener.onItemClick(item) }
+            if (item.jaime) {
+                jaime.setTextColor(c.getResources().getColor(R.color.colorRose));
+            }
+            else
+            {
+                jaime.setTextColor(c.getResources().getColor(R.color.graycolorfonce));
+            }
+
+            jaime.setOnClickListener(View.OnClickListener { i ->
+                item.jaime = !item.jaime
+                if (item.jaime) {
+                    item.nbJaime++
+                    jaime.setTextColor(c.getResources().getColor(R.color.colorRose))
+                    nbjaime.text= "${item.nbJaime}  "+"{fa-thumbs-up}"
+                }
+                else
+                {
+                    item.nbJaime--
+                    jaime.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
+                    nbjaime.text= "${item.nbJaime}  "+"{fa-thumbs-up}"
+                }
+            })
+        }
+    }
+
 }

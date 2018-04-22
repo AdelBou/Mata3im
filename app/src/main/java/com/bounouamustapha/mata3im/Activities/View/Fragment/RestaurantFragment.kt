@@ -4,13 +4,14 @@ package com.bounouamustapha.mata3im.Activities.View.Fragment
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import com.bounouamustapha.mata3im.Activities.Controller.DataController
+import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnItemClickListener
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
@@ -23,6 +24,7 @@ import kotlinx.android.synthetic.main.fragment_list_of_restaurants.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
 
 
 /**
@@ -59,29 +61,30 @@ class RestaurantFragment : Fragment() {
 
 
     fun initialiseListRestaurentsFragment(restaurantModel: RestaurantModel, v: View) {
-        val restaurantsAdapter = RestaurantsAdapter(v.context, loadData())
-        var listRestaurants= v.findViewById<ListView>(R.id.listRestaurants)
-        listRestaurants.adapter = restaurantsAdapter
-        listRestaurants.setOnItemClickListener { adapterView, view, i, l ->
-            if (isTwoPane(v)) {
-                // display detail data
-                restaurantModel.restaurant = loadData()[i]
-                initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
-            } else {
-                startActivity(intentFor<RestaurantActivity>().singleTop())
-
-                // send the position to the detail activity
-                //  startActivity(intentFor<DetailActivity>("pos" to i))
+        val restaurantsAdapter = RestaurantsAdapter(v.context,
+                loadData(), object : OnItemClickListener {
+                 override fun onItemClick(item: Restaurant) {
+                     if (isTwoPane(v)) {
+                         // display detail data
+                         restaurantModel.restaurant = item
+                         initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
+                     } else {
+                         startActivity(intentFor<RestaurantActivity>().singleTop())
+                         // send the position to the detail activity
+                         //  startActivity(intentFor<DetailActivity>("pos" to i))
+                     }
             }
-        }
 
-
+        })
+        var listRestaurants = v.findViewById<RecyclerView>(R.id.listRestaurants)
+        listRestaurants.adapter = restaurantsAdapter
+        listRestaurants.layoutManager = LinearLayoutManager(v.context, LinearLayout.VERTICAL, false)
     }
 
     fun initialiseDetailOfRestaurentsFragment(restaurant: Restaurant, v: View) {
-        var nameDetail= v.findViewById<TextView>(R.id.nameDetail)
-        var imageDetail=v.findViewById<ImageView>(R.id.imageDetail)
-        var description=v.findViewById<TextView>(R.id.description)
+        var nameDetail = v.findViewById<TextView>(R.id.nameDetail)
+        var imageDetail = v.findViewById<ImageView>(R.id.imageDetail)
+        var description = v.findViewById<TextView>(R.id.description)
         nameDetail.text = restaurant.name
         imageDetail.setImageResource(R.drawable.istanbul_detail)
         description.text = restaurant.description

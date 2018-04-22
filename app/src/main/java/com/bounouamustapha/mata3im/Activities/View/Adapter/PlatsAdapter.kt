@@ -8,11 +8,13 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 import com.bounouamustapha.mata3im.Activities.Model.PlatUnaire
+import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.R
 
 /**
  * Created by bounouamustapha on 4/4/18.
  */
+
 class PlatsAdapter (_ctx: Context, listPlatUnaires:List<PlatUnaire>): BaseAdapter() {
     var ctx = _ctx
     val listPlats = listPlatUnaires

@@ -1,5 +1,6 @@
 package com.bounouamustapha.mata3im.Activities.Controller
 
+import com.bounouamustapha.mata3im.Activities.Model.Plat
 import com.bounouamustapha.mata3im.Activities.Model.PlatUnaire
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.R
@@ -11,12 +12,9 @@ class DataController {
 
     fun getRestaurants():List<Restaurant> {
         var list = mutableListOf<Restaurant>()
-        var list2 = mutableListOf<PlatUnaire>()
-        var plat= PlatUnaire(
-                R.drawable.ic_launcher_background,
-                R.drawable.ic_launcher_foreground,
-                "test",
-                "test"
+        var list2 = mutableListOf<Plat>()
+        var plat= Plat(true,true
+
         )
         for (i in 0..5) list2.add(plat)
 
@@ -24,13 +22,13 @@ class DataController {
                 R.drawable.ic_launcher_background,
                 R.drawable.ic_launcher_foreground,
                 "test",
-                "test",list2
+                "test","desc",66,false,list2
         )
         var restaurant2 = Restaurant(
                 R.drawable.ic_launcher_background,
                 R.drawable.ic_launcher_foreground,
                 "test2",
-                "test2",list2
+                "test2","desc",78,false,list2
         )
 
 
