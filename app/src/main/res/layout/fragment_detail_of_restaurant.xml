@@ -34,7 +34,7 @@
                 <!-- TODO: Update blank fragment layout -->
                 <com.synnapps.carouselview.CarouselView
                     android:id="@+id/carouselView"
-                    android:layout_width="wrap_contentdp"
+                    android:layout_width="wrap_content"
                     android:layout_height="200dp"
                     app:fillColor="#FFFFFFFF"
                     app:layout_constraintEnd_toEndOf="parent"
