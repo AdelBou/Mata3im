@@ -14,8 +14,7 @@ public class Myapp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Iconify
-                .with(new FontAwesomeModule());
+        Iconify.with(new FontAwesomeModule());
 
     }
 }

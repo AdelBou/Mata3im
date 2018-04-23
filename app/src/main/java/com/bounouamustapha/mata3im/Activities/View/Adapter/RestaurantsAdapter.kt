@@ -12,6 +12,7 @@ import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnItemClickListen
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.R
 import com.joanzapata.iconify.widget.IconTextView
+import kotlinx.coroutines.experimental.newCoroutineContext
 import org.jetbrains.anko.textColor
 
 /**
@@ -22,6 +23,7 @@ class RestaurantsAdapter(var c :Context,var listRestaurants: List<Restaurant>, v
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder?.txtName?.text = listRestaurants[position].name
         holder?.nbjaime?.text = "${listRestaurants[position].nbJaime}  "+"{fa-thumbs-up}"
+        holder?.image?.setImageResource(listRestaurants[position].listImage)
         // holder?.txtTitle?.text = listRestaurants[position].title
         holder?.bind(c,listRestaurants.get(position), listener)
 
@@ -42,11 +44,13 @@ class RestaurantsAdapter(var c :Context,var listRestaurants: List<Restaurant>, v
         val jaime = itemView.findViewById<IconTextView>(R.id.jaime)
         val nbjaime=itemView.findViewById<IconTextView>(R.id.nbjaime)
         val detail=itemView.findViewById<TextView>(R.id.detail)
-
+        val image=itemView.findViewById<ImageView>(R.id.imagelist)
         //   val txtTitle = itemView.findViewById<TextView>(R.id.txtTitle)
         public fun bind(c:Context,item: Restaurant, listener: OnItemClickListener) {
-
+            if (detail!=null)
             detail.setOnClickListener { listener.onItemClick(item) }
+            txtName.setOnClickListener { listener.onItemClick(item) }
+
             if (item.jaime) {
                 jaime.setTextColor(c.getResources().getColor(R.color.colorRose));
             }
