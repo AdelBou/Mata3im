@@ -1,16 +1,20 @@
 package com.bounouamustapha.mata3im.Activities.View.Fragment
 
 
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.ListView
-import android.widget.TextView
+import android.widget.*
 import com.bounouamustapha.mata3im.Activities.Controller.DataController
+import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnItemClickListener
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
@@ -18,18 +22,23 @@ import com.bounouamustapha.mata3im.Activities.View.activity.ListRestaurantActivi
 import com.bounouamustapha.mata3im.Activities.View.activity.RestaurantActivity
 
 import com.bounouamustapha.mata3im.R
+import com.synnapps.carouselview.CarouselView
 import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.*
 import kotlinx.android.synthetic.main.fragment_list_of_restaurants.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.support.v4.intentFor
+import org.jetbrains.anko.support.v4.toast
+import com.synnapps.carouselview.ImageListener
+import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.view.*
 
 
+@SuppressLint("ValidFragment")
 /**
  * A simple [Fragment] subclass.
  */
-class RestaurantFragment : Fragment() {
-
+class RestaurantFragment (): Fragment() {
+    lateinit  var nameDetail :TextView ;
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,8 +50,20 @@ class RestaurantFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         initialiseListRestaurentsFragment(restaurantModel, view)
+
+
         if (isTwoPane(view)) {
-            initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant, view)
+            view.carouselViewDetail.setPageCount(restaurantModel.restaurant.detailImage.size)
+            var imageListener: ImageListener = object : ImageListener {
+                override fun setImageForPosition(position: Int, imageView: ImageView) {
+                    imageView.setImageResource(restaurantModel.restaurant.detailImage[position])
+                }
+            }
+            view.carouselViewDetail.setImageListener(imageListener)
+            view.nameDetailDetail.text = restaurantModel.restaurant.name
+            view.descriptionDetail.text = restaurantModel.restaurant.description
+          ///  initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant, view)
+
         }
 
 
@@ -59,31 +80,53 @@ class RestaurantFragment : Fragment() {
 
 
     fun initialiseListRestaurentsFragment(restaurantModel: RestaurantModel, v: View) {
-        val restaurantsAdapter = RestaurantsAdapter(v.context, loadData())
-        var listRestaurants= v.findViewById<ListView>(R.id.listRestaurants)
-        listRestaurants.adapter = restaurantsAdapter
-        listRestaurants.setOnItemClickListener { adapterView, view, i, l ->
-            if (isTwoPane(v)) {
-                // display detail data
-                restaurantModel.restaurant = loadData()[i]
-                initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
-            } else {
-                startActivity(intentFor<RestaurantActivity>().singleTop())
+        val restaurantsAdapter = RestaurantsAdapter(v.context,
+                loadData(), object : OnItemClickListener {
+                 override fun onItemClick(item: Restaurant) {
+                     if (isTwoPane(v)) {
+                         toast(item.name)
+                         restaurantModel.restaurant = item
+                         v.carouselViewDetail.setPageCount(restaurantModel.restaurant.detailImage.size)
+                         var imageListener: ImageListener = object : ImageListener {
+                             override fun setImageForPosition(position: Int, imageView: ImageView) {
+                                 imageView.setImageResource(restaurantModel.restaurant.detailImage[position])
+                             }
+                         }
+                         v.carouselViewDetail.setImageListener(imageListener)
+                         v.nameDetailDetail.text = item.name
+                         v.descriptionDetail.text = item.description
+                         //initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
+                     } else {
+                         val intent = Intent(v.context, RestaurantActivity::class.java)
+                         intent.putExtra("restaurant", item)
+                         startActivity(intent)
+                        // startActivity(intentFor<RestaurantActivity>().singleTop())
+                         // send the position to the detail activity
 
-                // send the position to the detail activity
-                //  startActivity(intentFor<DetailActivity>("pos" to i))
+                     }
+            }
+
+        })
+        var listRestaurants = v.findViewById<RecyclerView>(R.id.listRestaurants)
+        listRestaurants.adapter = restaurantsAdapter
+        listRestaurants.layoutManager = LinearLayoutManager(v.context, LinearLayout.VERTICAL, false) as RecyclerView.LayoutManager?
+    }
+/*
+    fun initialiseDetailOfRestaurentsFragment(restaurant: Restaurant, v: View) {
+      //  var nameDetail = v.findViewById<TextView>(R.id.nameDetail)
+        var description = v.findViewById<TextView>(R.id.description)
+        var carouselView = v.findViewById<CarouselView>(R.id.carouselView)
+        carouselView.setPageCount(restaurant.detailImage.size)
+        var imageListener: ImageListener = object : ImageListener {
+            override fun setImageForPosition(position: Int, imageView: ImageView) {
+                imageView.setImageResource(restaurant.detailImage[position])
             }
         }
+        carouselView.setImageListener(imageListener)
+        nameDetail.text = "adel"
+        description.text = "adel"
+    }*/
 
 
-    }
 
-    fun initialiseDetailOfRestaurentsFragment(restaurant: Restaurant, v: View) {
-        var nameDetail= v.findViewById<TextView>(R.id.nameDetail)
-        var imageDetail=v.findViewById<ImageView>(R.id.imageDetail)
-        var description=v.findViewById<TextView>(R.id.description)
-        nameDetail.text = restaurant.name
-        imageDetail.setImageResource(R.drawable.istanbul_detail)
-        description.text = restaurant.description
-    }
 }// Required empty public constructor

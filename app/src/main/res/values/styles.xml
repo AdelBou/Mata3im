@@ -3,11 +3,16 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-    </style>
+        <item name="colorPrimary">@color/colorgreen</item>
+        <item name="colorPrimaryDark">@color/colorgreendark</item>
+        <item name="colorAccent">@color/colorDark</item>
 
+
+    </style>
+    <style name="tabStyle" parent="AppTheme.AppBarOverlay">
+        <item name="colorControlNormal">@color/colorRose</item>
+        <item name="searchViewStyle">@color/background</item>
+    </style>
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -16,5 +21,20 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
+    <!-- for text -->
+    <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:fontFamily">@font/autour_one</item>
+        <item name="textAllCaps">false</item>
+    </style>
+    <style name="titelStyle" >
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/background</item>
+        <item name="android:fontFamily">@font/autour_one</item>
+    </style>
 
 </resources>

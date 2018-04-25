@@ -5,44 +5,29 @@
     android:id="@+id/main_content"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
+    android:fitsSystemWindows="true">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/appbar_padding_top"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabMenuJour"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Le menu du jour" />
-
-            <android.support.design.widget.TabItem
-                android:id="@+id/tabCategorie"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Category des menus" />
-
-
-
-
-        </android.support.design.widget.TabLayout>
-    </android.support.design.widget.AppBarLayout>
+        android:elevation="0dp"
+        app:tabContentStart="@dimen/appbar_padding_top"
+        app:tabIndicatorColor="@color/colorRose"
+        app:tabMode="scrollable"
+        app:tabTextAppearance="@style/AppTabTextAppearance"
+        app:tabSelectedTextColor="@color/colorRose"
+        app:tabTextColor="@color/colorDark" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tabs"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
+    </RelativeLayout>
 
 </android.support.design.widget.CoordinatorLayout>

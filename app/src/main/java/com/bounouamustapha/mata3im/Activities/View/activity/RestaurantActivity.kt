@@ -1,5 +1,6 @@
 package com.bounouamustapha.mata3im.Activities.View.activity
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.design.widget.NavigationView
@@ -17,17 +18,24 @@ import kotlinx.android.synthetic.main.app_bar_restaurants.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.toast
+import android.graphics.Movie
+import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
+import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
+import com.synnapps.carouselview.CarouselView
+import com.synnapps.carouselview.ImageListener
+
 
 class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
+    lateinit var r :Restaurant
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_restaurants)
         setSupportActionBar(toolbar)
-
-        //addedd by adel
-
-
+         r = intent.getSerializableExtra("restaurant") as Restaurant
+        val restaurantModel = ViewModelProviders.of(this).get(RestaurantModel::class.java)
+        restaurantModel.restaurant = r
 
 
 
@@ -80,10 +88,12 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         var fragmentTransaction = supportFragmentManager.beginTransaction()
         when (item.itemId) {
             R.id.ceRestaurant -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, DetailOfRestaurantFragment()).commit()
+
+                fragmentTransaction.replace(R.id.fragmentRestaurants,CeRestaurantFragment(r)).commit()
+              //  initialiseDetailOfRestaurentsFragment(r)
             }
             R.id.restaurants -> {
-                startActivity(intentFor<ListRestaurantActivity>("id" to 5).singleTop())
+                startActivity(intentFor<ListRestaurantActivity>().singleTop())
             }
             R.id.favoriteCategories -> {
                 fragmentTransaction.replace(R.id.fragmentRestaurants, FavouriteMenuFragment()).commit()
@@ -92,7 +102,7 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 fragmentTransaction.replace(R.id.fragmentRestaurants, PanierFragment()).commit()
             }
             R.id.lesMenus -> {
-                fragmentTransaction.replace(R.id.lesMenus, MenusFragment()).commit()
+                fragmentTransaction.replace(R.id.fragmentRestaurants, MenusFragment()).commit()
             }
             R.id.reserverUnetable-> {
                 toast("reserver une table")
@@ -112,6 +122,9 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
         drawer_layoutRestaurant.closeDrawer(GravityCompat.START)
         return true
     }
+
+
+
 
 
 

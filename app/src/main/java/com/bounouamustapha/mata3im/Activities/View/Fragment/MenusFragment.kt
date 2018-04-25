@@ -12,6 +12,10 @@ import android.view.ViewGroup
 
 import com.bounouamustapha.mata3im.R
 import kotlinx.android.synthetic.main.fragment_menus.*
+import kotlinx.android.synthetic.main.fragment_menus.view.*
+import android.support.v4.view.ViewPager
+import com.bounouamustapha.mata3im.Activities.View.Adapter.MyPagerAdapter
+
 
 /**
  * A simple [Fragment] subclass.
@@ -30,9 +34,12 @@ class MenusFragment : Fragment() {
         var view= inflater.inflate(R.layout.fragment_menus, container, false)
 
 
+        view.container.adapter =MyPagerAdapter(activity!!.getSupportFragmentManager(), this!!.context!!)
+        view.tabs.setupWithViewPager(view.container)
         return  view
 
     }
+
 
 
 }
