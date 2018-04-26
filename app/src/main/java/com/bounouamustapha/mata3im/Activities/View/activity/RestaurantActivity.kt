@@ -39,10 +39,7 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
 
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layoutRestaurant, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -96,13 +93,13 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 startActivity(intentFor<ListRestaurantActivity>().singleTop())
             }
             R.id.favoriteCategories -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, FavouriteMenuFragment()).commit()
+                fragmentTransaction.replace(R.id.fragmentRestaurants, MenuDetailFragment(r.listPlats.filter { s->s.bookmark })).commit()
             }
             R.id.panier -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, PanierFragment()).commit()
+                fragmentTransaction.replace(R.id.fragmentRestaurants, MenuDetailFragment(r.listPlats)).commit()
             }
             R.id.lesMenus -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, MenusFragment()).commit()
+                fragmentTransaction.replace(R.id.fragmentRestaurants, MenusFragment(r)).commit()
             }
             R.id.reserverUnetable-> {
                 toast("reserver une table")

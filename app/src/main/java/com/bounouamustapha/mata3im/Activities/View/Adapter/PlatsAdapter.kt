@@ -5,76 +5,96 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
-import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnItemClickListener
+import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnPlatClickListner
 import com.bounouamustapha.mata3im.Activities.Model.Plat
-import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.R
 import com.joanzapata.iconify.widget.IconTextView
-import kotlinx.coroutines.experimental.newCoroutineContext
-import org.jetbrains.anko.textColor
 
 /**
  * Created by bounouamustapha on 4/1/18.
  */
-class PlatsAdapter(var c :Context,var listRestaurants: List<Plat>, var listener: OnItemClickListener) : RecyclerView.Adapter<RestaurantsAdapter.ViewHolder>() {
+class PlatsAdapter(var c :Context, var listPlats: List<Plat>, var listener: OnPlatClickListner) : RecyclerView.Adapter<PlatsAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.txtName?.text = listRestaurants[position].name
-        holder?.nbjaime?.text = "${listRestaurants[position].nbJaime}  "+"{fa-thumbs-up}"
-        holder?.image?.setImageResource(listRestaurants[position].listImage)
-        // holder?.txtTitle?.text = listRestaurants[position].title
-        holder?.bind(c,listRestaurants.get(position), listener)
-
+        holder?.txtName?.text = listPlats[position].name
+        holder?.image?.setImageResource(listPlats[position].listImage)
+        holder?.price?.text="${listPlats[position].prix}"+"{ion-social-usd}";
+        holder?.bind(c,listPlats.get(position), listener)
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.restaurant_item, parent, false)
-        return ViewHolder(v);
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_plat, parent, false)
+        return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
-        return listRestaurants.size
+        return listPlats.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtName = itemView.findViewById<TextView>(R.id.name)
-        val jaime = itemView.findViewById<IconTextView>(R.id.jaime)
-        val nbjaime=itemView.findViewById<IconTextView>(R.id.nbjaime)
-        val detail=itemView.findViewById<TextView>(R.id.detail)
-        val image=itemView.findViewById<ImageView>(R.id.imagelist)
-        //   val txtTitle = itemView.findViewById<TextView>(R.id.txtTitle)
-        public fun bind(c:Context,item: Restaurant, listener: OnItemClickListener) {
-            if (detail!=null)
-                detail.setOnClickListener { listener.onItemClick(item) }
-            txtName.setOnClickListener { listener.onItemClick(item) }
+        val txtName = itemView.findViewById<TextView>(R.id.namePlat)
+        val buy = itemView.findViewById<IconTextView>(R.id.buyPlat)
+        var bookmark=itemView.findViewById<IconTextView>(R.id.bookmark)
+        var cart=itemView.findViewById<IconTextView>(R.id.addCart)
+        val image=itemView.findViewById<ImageView>(R.id.imagelistPlat)
+        var price=itemView.findViewById<IconTextView>(R.id.price)
+        var dujour=itemView.findViewById<IconTextView>(R.id.dujour)
+        var vegetarien=itemView.findViewById<IconTextView>(R.id.vegetarien)
+        var diabetique=itemView.findViewById<IconTextView>(R.id.diabetique)
+        var binaire=itemView.findViewById<IconTextView>(R.id.binaire)
 
-            if (item.jaime) {
-                jaime.setTextColor(c.getResources().getColor(R.color.colorRose));
+        fun bind(c:Context, item: Plat, listener: OnPlatClickListner) {
+            if (!item.dujour) dujour.visibility=View.GONE
+            if (!item.vegetarien) vegetarien.visibility=View.GONE
+            if (!item.diabetique) diabetique.visibility=View.GONE
+            if (!item.binaire) binaire.visibility=View.GONE
+
+            image.setOnClickListener{listener.onItemClick(item)}
+            txtName.setOnClickListener{listener.onItemClick(item)}
+
+            if (item.bookmark) {
+                bookmark.setTextColor(c.getResources().getColor(R.color.colorRose))
             }
             else
             {
-                jaime.setTextColor(c.getResources().getColor(R.color.graycolorfonce));
+                bookmark.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
+            }
+            if (item.cart) {
+                cart.setTextColor(c.getResources().getColor(R.color.colorRose))
+            }
+            else
+            {
+                cart.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
             }
 
-            jaime.setOnClickListener(View.OnClickListener { i ->
-                item.jaime = !item.jaime
-                if (item.jaime) {
-                    item.nbJaime++
-                    jaime.setTextColor(c.getResources().getColor(R.color.colorRose))
-                    nbjaime.text= "${item.nbJaime}  "+"{fa-thumbs-up}"
+
+            bookmark.setOnClickListener(View.OnClickListener { i ->
+                item.bookmark = !item.bookmark
+                if (item.bookmark) {
+                    bookmark.setTextColor(c.getResources().getColor(R.color.colorRose))
                 }
                 else
                 {
-                    item.nbJaime--
-                    jaime.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
-                    nbjaime.text= "${item.nbJaime}  "+"{fa-thumbs-up}"
+                    bookmark.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
+                }
+            })
+
+
+            cart.setOnClickListener(View.OnClickListener { i ->
+                item.cart = !item.cart
+                if (item.cart) {
+                    cart.setTextColor(c.getResources().getColor(R.color.colorRose))
+                }
+                else
+                {
+                    cart.setTextColor(c.getResources().getColor(R.color.graycolorfonce))
                 }
             })
         }
     }
+
 
 }

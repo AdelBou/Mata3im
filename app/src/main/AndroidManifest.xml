@@ -51,7 +51,11 @@
 
         <activity
             android:name=".Activities.View.activity.MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
+        <activity
+            android:name=".Activities.View.activity.PlatDetailActivity"
+            android:label="@string/title_activity_plat_detail"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

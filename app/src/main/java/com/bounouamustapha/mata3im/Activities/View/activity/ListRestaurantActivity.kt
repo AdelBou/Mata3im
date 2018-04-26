@@ -8,10 +8,8 @@ import android.support.v7.app.ActionBarDrawerToggle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import com.bounouamustapha.mata3im.Activities.View.Fragment.FavouriteMenuFragment
-import com.bounouamustapha.mata3im.Activities.View.Fragment.PanierFragment
-import com.bounouamustapha.mata3im.Activities.View.Fragment.ReservationsFragment
-import com.bounouamustapha.mata3im.Activities.View.Fragment.RestaurantFragment
+import com.bounouamustapha.mata3im.Activities.Controller.DataController
+import com.bounouamustapha.mata3im.Activities.View.Fragment.*
 import com.bounouamustapha.mata3im.R
 import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.app_bar_list_restaurant.*
@@ -24,10 +22,6 @@ class ListRestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationI
         setContentView(R.layout.activity_list_restaurant)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -72,7 +66,7 @@ class ListRestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationI
                 fragmentTransaction.replace(R.id.fragmentListRestaurants, RestaurantFragment()).commit()
             }
             R.id.favoriteCategories -> {
-                fragmentTransaction.replace(R.id.fragmentListRestaurants, FavouriteMenuFragment()).commit()
+                fragmentTransaction.replace(R.id.fragmentListRestaurants, MenuDetailFragment(DataController().getRestaurants().get(0).listPlats.filter { s->s.bookmark })).commit()
             }
             R.id.panier -> {
                 fragmentTransaction.replace(R.id.fragmentListRestaurants, PanierFragment()).commit()
