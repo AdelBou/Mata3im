@@ -14,6 +14,10 @@ import com.bounouamustapha.mata3im.R
 import kotlinx.android.synthetic.main.activity_list_restaurant.*
 import kotlinx.android.synthetic.main.app_bar_list_restaurant.*
 import org.jetbrains.anko.toast
+import com.joanzapata.iconify.fonts.FontAwesomeIcons
+import com.joanzapata.iconify.IconDrawable
+import com.joanzapata.iconify.fonts.IoniconsIcons
+
 
 class ListRestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -27,6 +31,16 @@ class ListRestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationI
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
+        var color=R.color.colorRose
+        nav_view.getMenu().findItem(R.id.restaurants).setIcon(IconDrawable(this, IoniconsIcons.ion_android_restaurant).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.mesReservations).setIcon(IconDrawable(this, IoniconsIcons.ion_calendar).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.favoriteCategories).setIcon(IconDrawable(this, IoniconsIcons.ion_star).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.panier).setIcon(IconDrawable(this, IoniconsIcons.ion_android_cart).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.sommeNous).setIcon(IconDrawable(this, IoniconsIcons.ion_information_circled).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.contacter).setIcon(IconDrawable(this, IoniconsIcons.ion_paper_airplane).colorRes(color).sizeDp(50))
+
+
+
 
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -44,7 +58,7 @@ class ListRestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationI
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.list_restaurant, menu)
+      //  menuInflater.inflate(R.menu.list_restaurant, menu)
         return true
     }
 

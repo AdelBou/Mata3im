@@ -4,9 +4,9 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.bounouamustapha.mata3im.Activities.View.Fragment.PanierFragment">
+    tools:context="com.bounouamustapha.mata3im.Activities.View.Fragment.BinairePlatFragment">
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/listPlatPanier"
+        android:id="@+id/listPlatBinaire"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="0dp"

@@ -21,7 +21,8 @@ data class Restaurant  (var listImage:Int=0,
                         var instagram: String="",
                         var twitter:String="",
                         var x :Double= 0.0,
-                        var y :Double=0.0
+                        var y :Double=0.0,
+                        var listBinaire:MutableList<PlatBinaire> = mutableListOf<PlatBinaire>()
                         ):Serializable
 {
 }

@@ -19,6 +19,7 @@ import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.RestaurantsAdapter
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
 import com.bounouamustapha.mata3im.Activities.View.activity.ListRestaurantActivity
+import com.bounouamustapha.mata3im.Activities.View.activity.MapsActivity
 import com.bounouamustapha.mata3im.Activities.View.activity.RestaurantActivity
 
 import com.bounouamustapha.mata3im.R
@@ -27,10 +28,9 @@ import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.*
 import kotlinx.android.synthetic.main.fragment_list_of_restaurants.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
-import org.jetbrains.anko.support.v4.intentFor
-import org.jetbrains.anko.support.v4.toast
 import com.synnapps.carouselview.ImageListener
 import kotlinx.android.synthetic.main.fragment_detail_of_restaurant.view.*
+import org.jetbrains.anko.support.v4.*
 
 
 @SuppressLint("ValidFragment")
@@ -46,23 +46,14 @@ class RestaurantFragment (): Fragment() {
 
         val restaurantModel = ViewModelProviders.of(this).get(RestaurantModel::class.java)
         restaurantModel.restaurant = loadData()[0]
-
+        activity!!.setTitle("Les restaurants traditionnels")
         val view = inflater.inflate(R.layout.fragment_main, container, false)
 
         initialiseListRestaurentsFragment(restaurantModel, view)
 
 
         if (isTwoPane(view)) {
-            view.carouselViewDetail.setPageCount(restaurantModel.restaurant.detailImage.size)
-            var imageListener: ImageListener = object : ImageListener {
-                override fun setImageForPosition(position: Int, imageView: ImageView) {
-                    imageView.setImageResource(restaurantModel.restaurant.detailImage[position])
-                }
-            }
-            view.carouselViewDetail.setImageListener(imageListener)
-            view.nameDetailDetail.text = restaurantModel.restaurant.name
-            view.descriptionDetail.text = restaurantModel.restaurant.description
-          ///  initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant, view)
+            initialiseDetailFrag(view,restaurantModel)
 
         }
 
@@ -84,25 +75,12 @@ class RestaurantFragment (): Fragment() {
                 loadData(), object : OnItemClickListener {
                  override fun onItemClick(item: Restaurant) {
                      if (isTwoPane(v)) {
-                         toast(item.name)
-                         restaurantModel.restaurant = item
-                         v.carouselViewDetail.setPageCount(restaurantModel.restaurant.detailImage.size)
-                         var imageListener: ImageListener = object : ImageListener {
-                             override fun setImageForPosition(position: Int, imageView: ImageView) {
-                                 imageView.setImageResource(restaurantModel.restaurant.detailImage[position])
-                             }
-                         }
-                         v.carouselViewDetail.setImageListener(imageListener)
-                         v.nameDetailDetail.text = item.name
-                         v.descriptionDetail.text = item.description
-                         //initialiseDetailOfRestaurentsFragment(restaurantModel.restaurant,v)
+                         restaurantModel.restaurant=item
+                         initialiseDetailFrag(v,restaurantModel)
                      } else {
                          val intent = Intent(v.context, RestaurantActivity::class.java)
                          intent.putExtra("restaurant", item)
                          startActivity(intent)
-                        // startActivity(intentFor<RestaurantActivity>().singleTop())
-                         // send the position to the detail activity
-
                      }
             }
 
@@ -126,7 +104,73 @@ class RestaurantFragment (): Fragment() {
         nameDetail.text = "adel"
         description.text = "adel"
     }*/
+fun initialiseDetailFrag(view :View ,restaurantModel :RestaurantModel){
 
+    view.carouselViewDetail.setPageCount(restaurantModel.restaurant.detailImage.size)
+    var imageListener: ImageListener = object : ImageListener {
+        override fun setImageForPosition(position: Int, imageView: ImageView) {
+            imageView.setImageResource(restaurantModel.restaurant.detailImage[position])
+        }
+    }
+    view.carouselViewDetail.setImageListener(imageListener)
+    view.nameDetailDetail.text = restaurantModel.restaurant.name
+    view.descriptionDetail.text = restaurantModel.restaurant.description
+    view.mailDetail.text=restaurantModel.restaurant.mail
+    view.telDetail.text=restaurantModel.restaurant.tel
+    view.adresseDetail.text=restaurantModel.restaurant.adresse
+    view.facebookDetail.setOnClickListener({browse(restaurantModel.restaurant.facebook)})
+    view.instagramDetail.setOnClickListener({browse(restaurantModel.restaurant.instagram)})
+    view.twitterDetail.setOnClickListener({browse(restaurantModel.restaurant.twitter)})
+    view.telDetail.setOnClickListener({makeCall(restaurantModel.restaurant.tel)})
+    view.mailDetail.setOnClickListener({email(restaurantModel.restaurant.mail)})
+    view.goplateDetail.setOnClickListener({toast("go to menus")})
+    view.gomapDetail.setOnClickListener({
+        val intent = Intent(context, MapsActivity::class.java)
+        intent.putExtra("restaurant", restaurantModel.restaurant)
+        startActivity(intent)})
+    view.reserverDetail.setOnClickListener({toast("reserver")})
+    view.shareDetail.setOnClickListener({share(restaurantModel.restaurant.name,restaurantModel.restaurant.description)})
+
+    if (restaurantModel.restaurant.jaime) {
+        view.jaime2Detail.setTextColor(getResources().getColor(R.color.colorRose));
+    }
+    else
+    {
+        view.jaime2Detail.setTextColor(getResources().getColor(R.color.graycolorfonce));
+    }
+
+
+    view.jaime2Detail.setOnClickListener({
+        restaurantModel.restaurant.jaime = !restaurantModel.restaurant.jaime
+        if (restaurantModel.restaurant.jaime) {
+            restaurantModel.restaurant.nbJaime++
+            view.jaime2Detail.setTextColor(getResources().getColor(R.color.colorRose))
+            view.nbjaimedetailDetail.text= "${restaurantModel.restaurant.nbJaime}"
+        }
+        else
+        {
+            restaurantModel.restaurant.nbJaime--
+            view.jaime2Detail.setTextColor(getResources().getColor(R.color.graycolorfonce))
+            view.nbjaimedetailDetail.text= "${restaurantModel.restaurant.nbJaime}"
+
+        }
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+}
 
 
 }// Required empty public constructor

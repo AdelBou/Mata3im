@@ -11,7 +11,7 @@
         <item
             android:id="@+id/restaurants"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Chercher un autre Restaurant" />
+            android:title="Tous les restaurants" />
         <item
             android:id="@+id/lesMenus"
             android:icon="@drawable/ic_menu_gallery"
@@ -19,11 +19,10 @@
         <item
             android:id="@+id/favoriteCategories"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="Categories Favorite " />
+            android:title="Mes Favoris " />
         <item
             android:id="@+id/reserverUnetable"
-            android:icon="@drawable/ic_menu_gallery"
-            android:title="Reserver une table" />
+            android:title="Réserver une table" />
         <item
             android:id="@+id/panier"
             android:icon="@drawable/ic_menu_slideshow"

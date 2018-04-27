@@ -18,13 +18,11 @@ import kotlinx.android.synthetic.main.app_bar_restaurants.*
 import org.jetbrains.anko.intentFor
 import org.jetbrains.anko.singleTop
 import org.jetbrains.anko.toast
-import android.graphics.Movie
-import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
+
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
-import com.synnapps.carouselview.CarouselView
-import com.synnapps.carouselview.ImageListener
+import com.joanzapata.iconify.IconDrawable
+import com.joanzapata.iconify.fonts.IoniconsIcons
+
 
 
 class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
@@ -36,6 +34,18 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
          r = intent.getSerializableExtra("restaurant") as Restaurant
         val restaurantModel = ViewModelProviders.of(this).get(RestaurantModel::class.java)
         restaurantModel.restaurant = r
+
+
+        var color=R.color.colorRose
+        var nav_view =nav_viewRestaurant
+        nav_view.getMenu().findItem(R.id.ceRestaurant).setIcon(IconDrawable(this, IoniconsIcons.ion_android_restaurant).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.restaurants).setIcon(IconDrawable(this, IoniconsIcons.ion_search).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.favoriteCategories).setIcon(IconDrawable(this, IoniconsIcons.ion_star).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.panier).setIcon(IconDrawable(this, IoniconsIcons.ion_android_cart).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.lesMenus).setIcon(IconDrawable(this, IoniconsIcons.ion_fireball).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.reserverUnetable).setIcon(IconDrawable(this, IoniconsIcons.ion_calendar).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.sommeNous).setIcon(IconDrawable(this, IoniconsIcons.ion_information_circled).colorRes(color).sizeDp(50))
+        nav_view.getMenu().findItem(R.id.contacter).setIcon(IconDrawable(this, IoniconsIcons.ion_paper_airplane).colorRes(color).sizeDp(50))
 
 
 
@@ -66,7 +76,7 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.restaurants, menu)
+      //  menuInflater.inflate(R.menu.restaurants, menu)
         return true
     }
 
@@ -93,19 +103,19 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
                 startActivity(intentFor<ListRestaurantActivity>().singleTop())
             }
             R.id.favoriteCategories -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, MenuDetailFragment(r.listPlats.filter { s->s.bookmark })).commit()
+                toast("fav "+r.listPlats.filter { s->s.bookmark }.size)
+
+                fragmentTransaction.replace(R.id.fragmentRestaurants, MenuDetailFragment(r.listPlats.filter{ s->s.bookmark })).commit()
             }
             R.id.panier -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, MenuDetailFragment(r.listPlats)).commit()
+                fragmentTransaction.replace(R.id.fragmentRestaurants, PanierFragment()).commit()
             }
             R.id.lesMenus -> {
                 fragmentTransaction.replace(R.id.fragmentRestaurants, MenusFragment(r)).commit()
             }
+
             R.id.reserverUnetable-> {
                 toast("reserver une table")
-            }
-            R.id.mesReservations -> {
-                fragmentTransaction.replace(R.id.fragmentRestaurants, ReservationsFragment()).commit()
             }
             R.id.sommeNous-> {
                 toast("I m zoubir")
@@ -115,7 +125,6 @@ class RestaurantActivity : AppCompatActivity(), NavigationView.OnNavigationItemS
             }
 
         }
-
         drawer_layoutRestaurant.closeDrawer(GravityCompat.START)
         return true
     }

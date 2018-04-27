@@ -1,12 +1,15 @@
 package com.bounouamustapha.mata3im.Activities.View.activity
 
+import android.app.Activity
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.Menu
 import android.view.View
 import android.widget.ImageView
+import com.bounouamustapha.mata3im.Activities.Controller.Util
 import com.bounouamustapha.mata3im.Activities.Model.Plat
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.PlatModel
 import com.bounouamustapha.mata3im.Activities.View.ViewModel.RestaurantModel
@@ -78,12 +81,20 @@ class PlatDetailActivity : AppCompatActivity() {
             platModel.palt.cart = !platModel.palt.cart
             if (platModel.palt.cart) {
                 addCartDetail.setTextColor(getResources().getColor(R.color.colorRose))
+                Util.showCart(this,platModel.palt.name)
             }
             else
             {
                 addCartDetail.setTextColor(getResources().getColor(R.color.graycolorfonce))
             }
         })
+        buyPlatDetail.setOnClickListener({
+            Util.showBuy(this,platModel.palt.name)
+        })
     }
-
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        //  menuInflater.inflate(R.menu.list_restaurant, menu)
+        return true
+    }
 }

@@ -17,6 +17,9 @@ import kotlinx.android.synthetic.main.fragment_menus.view.*
 import android.support.v4.view.ViewPager
 import com.bounouamustapha.mata3im.Activities.Model.Restaurant
 import com.bounouamustapha.mata3im.Activities.View.Adapter.MyPagerAdapter
+import com.joanzapata.iconify.IconDrawable
+import com.joanzapata.iconify.fonts.FontAwesomeIcons
+import com.joanzapata.iconify.fonts.IoniconsIcons
 
 
 @SuppressLint("ValidFragment")
@@ -37,6 +40,17 @@ class MenusFragment (var r:Restaurant): Fragment() {
         var view= inflater.inflate(R.layout.fragment_menus, container, false)
         view.container.adapter =MyPagerAdapter(r,activity!!.getSupportFragmentManager(), this!!.context!!)
         view.tabs.setupWithViewPager(view.container)
+
+        view.tabs.getTabAt(0)!!.setIcon(IconDrawable(activity, IoniconsIcons.ion_fireball).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(1)!!.setIcon(IconDrawable(activity, IoniconsIcons.ion_leaf).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(2)!!.setIcon(IconDrawable(activity, FontAwesomeIcons.fa_plus).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(3)!!.setIcon(IconDrawable(activity, IoniconsIcons.ion_pricetags).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(4)!!.setIcon(IconDrawable(activity, IoniconsIcons.ion_arrow_down_c).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(5)!!.setIcon(IconDrawable(activity, IoniconsIcons.ion_bonfire).colorRes(R.color.colorRose).sizeDp(50))
+        view.tabs.getTabAt(6)!!.setIcon(IconDrawable(activity, FontAwesomeIcons.fa_birthday_cake).colorRes(R.color.colorRose).sizeDp(50))
+
+
+        activity!!.setTitle("Nos Plats")
         return  view
 
     }

@@ -5,7 +5,24 @@
         <item name="colorPrimary">@color/colorgreen</item>
         <item name="colorPrimaryDark">@color/colorgreendark</item>
         <item name="colorAccent">@color/colorDark</item>
+        <item name="android:fontFamily">@font/autour_one</item>
     </style>
+    <style name="AppThemeDialogueBuy" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorgreen</item>
+        <item name="colorPrimaryDark">@color/colorgreen</item>
+        <item name="colorAccent">@color/colorDark</item>
+    </style>
+
+
+    <style name="AppThemeDialogue" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorPrimary">@color/colorRose</item>
+        <item name="colorPrimaryDark">@color/colorRose</item>
+        <item name="colorAccent">@color/colorDark</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/autour_one</item>
+    </style>
+
 
     <style name="tabStyle" parent="AppTheme.AppBarOverlay">
         <item name="colorControlNormal">@color/colorRose</item>
@@ -25,7 +42,7 @@
     <!-- for text -->
     <style name="AppTabTextAppearance" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">15sp</item>
-        <item name="android:textColor">@color/colorDark</item>
+        <item name="android:textColor">@color/background</item>
         <item name="android:fontFamily">@font/autour_one</item>
         <item name="textAllCaps">false</item>
     </style>

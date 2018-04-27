@@ -8,7 +8,7 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.bounouamustapha.mata3im.Activities.View.Fragment.PlatDetailActivity">
+        tools:context="com.bounouamustapha.mata3im.Activities.View.activity.PlatDetailActivity">
 
 
         <android.support.constraint.Guideline

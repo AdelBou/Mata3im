@@ -44,7 +44,6 @@ class MenuDetailFragment(var r : List<Plat>) : Fragment() {
         val v:View =inflater.inflate(R.layout.fragment_menu_detail, container, false)
 
 
-        toast(r.size.toString())
         v.listPlat.adapter = PlatsAdapter(v.context,r,  object : OnPlatClickListner{
             override fun onItemClick(item: Plat) {
                 val intent = Intent(v.context, PlatDetailActivity::class.java)

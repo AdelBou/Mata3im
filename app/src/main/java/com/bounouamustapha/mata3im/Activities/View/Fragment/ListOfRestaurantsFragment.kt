@@ -19,7 +19,9 @@ class ListOfRestaurantsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
+        activity!!.setTitle("Les restaurants traditionnels")
         return inflater.inflate(R.layout.fragment_list_of_restaurants, container, false)
+
     }
 
 }// Required empty public constructor

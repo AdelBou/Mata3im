@@ -41,6 +41,7 @@ dependencies {
     compile 'com.joanzapata.iconify:android-iconify-fontawesome:2.2.2'
     compile 'com.synnapps:carouselview:0.1.4'
     compile 'com.joanzapata.iconify:android-iconify-ionicons:2.2.2'
+    compile 'com.yarolegovich:lovely-dialog:1.1.0'
 
 
 }

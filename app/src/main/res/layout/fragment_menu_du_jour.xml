@@ -8,32 +8,41 @@
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context="com.bounouamustapha.mata3im.Activities.View.Fragment.DetailOfRestaurantFragment">
+        tools:context="com.bounouamustapha.mata3im.Activities.View.Fragment.MenuDuJourFragment">
+
+
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline6"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="2dp" />
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             xmlns:card_view="http://schemas.android.com/tools"
             android:id="@+id/card_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="295dp"
             android:layout_margin="5dp"
+            android:layout_marginBottom="16dp"
             android:paddingBottom="0dp"
-            android:paddingTop="0dp"
+            android:paddingTop="8dp"
             app:cardCornerRadius="@dimen/activity_vertical_margin"
             app:layout_constraintBottom_toTopOf="@+id/card2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline6"
             card_view:cardCornerRadius="25dp">
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-
                 <com.synnapps.carouselview.CarouselView
-                    android:id="@+id/carouselViewDetail"
+                    android:id="@+id/carouselViewDetailjour"
                     android:layout_width="0dp"
                     android:layout_height="200dp"
                     app:fillColor="@color/graycolor"
@@ -49,23 +58,26 @@
                 </com.synnapps.carouselview.CarouselView>
 
                 <com.joanzapata.iconify.widget.IconTextView
-                    android:id="@+id/jaime2Detail"
-                    android:layout_width="50dp"
+                    android:id="@+id/priceDetailjourjour"
+                    android:layout_width="40dp"
                     android:layout_height="50dp"
-                    android:layout_marginBottom="8dp"
                     android:layout_marginEnd="8dp"
-                    android:background="@drawable/iconincardclick"
+                    android:layout_marginStart="8dp"
+                    android:background="@color/colorRose"
                     android:clickable="true"
+                    android:elevation="5dp"
                     android:gravity="center"
-                    android:text="{fa-heart}"
-                    android:textColor="@color/colorRose"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetail"
+                    android:text="{fa-credit-card}"
+                    android:textColor="@color/background"
+                    android:textSize="15dp"
+                    android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetail" />
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <com.joanzapata.iconify.widget.IconTextView
-                    android:id="@+id/shareDetail"
+                    android:id="@+id/buyPlatDetailJour"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="8dp"
@@ -73,15 +85,15 @@
                     android:background="@drawable/iconincardclick"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="{ion-share}"
-                    android:textColor="@color/colorRose"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetail"
-                    app:layout_constraintEnd_toStartOf="@+id/jaime2Detail"
-                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetail" />
+                    android:text="{fa-credit-card}"
+                    android:textColor="@color/colorgreen"
+                    android:textSize="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetailjour"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetailjour" />
 
                 <com.joanzapata.iconify.widget.IconTextView
-                    android:id="@+id/reserverDetail"
+                    android:id="@+id/bookmarkDetailjour"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_marginBottom="8dp"
@@ -89,131 +101,67 @@
                     android:background="@drawable/iconincardclick"
                     android:clickable="true"
                     android:gravity="center"
-                    android:text="{ion-android-restaurant}"
+                    android:text="{ion-star}"
                     android:textColor="@color/colorRose"
-                    android:textSize="20dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetail"
-                    app:layout_constraintEnd_toStartOf="@+id/shareDetail"
-                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetail" />
+                    android:textSize="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetailjour"
+                    app:layout_constraintEnd_toStartOf="@+id/buyPlatDetailJour"
+                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetailjour" />
+
+                <com.joanzapata.iconify.widget.IconTextView
+                    android:id="@+id/addCartDetailJour"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/iconincardclick"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:text="{ion-ios-cart}"
+                    android:textColor="@color/colorRose"
+                    android:textSize="24dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/carouselViewDetailjour"
+                    app:layout_constraintEnd_toStartOf="@+id/bookmarkDetailjour"
+                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetailjour" />
 
                 <TextView
-                    android:id="@+id/nameDetailDetail"
+                    android:id="@+id/namePlatDetailjour"
                     android:layout_width="0dp"
-                    android:layout_height="26dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/autour_one"
                     android:gravity="start"
                     android:text="textView"
                     android:textColor="@color/colorRose"
                     android:textSize="18sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/descriptionDetail"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetail"
-                    app:layout_constraintVertical_bias="0.52" />
+                    app:layout_constraintTop_toBottomOf="@+id/carouselViewDetailjour" />
 
                 <TextView
-                    android:id="@+id/descriptionDetail"
+                    android:id="@+id/descriptionPlatDetailjour"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginEnd="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginStart="24dp"
+                    android:layout_marginTop="8dp"
                     android:fontFamily="@font/autour_one"
                     android:text="TextView"
                     android:textColor="@color/colorDark"
                     android:textSize="14sp"
                     android:textStyle="italic"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintBottom_toTopOf="@+id/linearLayout"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.333"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/nameDetailDetail"
+                    app:layout_constraintTop_toBottomOf="@+id/namePlatDetailjour"
                     tools:ignore="MissingConstraints" />
 
-
-                <LinearLayout
-                    android:id="@+id/linearLayout"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal"
-                    android:padding="16dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/descriptionDetail"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="271dp">
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="{fa-thumbs-up}"
-                        android:textColor="@color/colorRose"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/nbjaimedetailDetail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="22"
-                        card_view:layout_editor_absoluteX="79dp"
-                        card_view:layout_editor_absoluteY="190dp" />
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="{ion-android-restaurant}"
-                        android:textColor="@color/colorRose"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/nbplatsDetailDetail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="22"
-                        card_view:layout_editor_absoluteX="79dp"
-                        card_view:layout_editor_absoluteY="190dp" />
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="{ion-person}"
-                        android:textColor="@color/colorRose"
-                        android:textSize="20dp" />
-
-                    <TextView
-                        android:id="@+id/nbplaceDetail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:text="22"
-                        card_view:layout_editor_absoluteX="79dp"
-                        card_view:layout_editor_absoluteY="190dp" />
-
-                </LinearLayout>
 
             </android.support.constraint.ConstraintLayout>
 
@@ -228,12 +176,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="5dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
             android:paddingBottom="0dp"
             android:paddingTop="0dp"
             app:cardCornerRadius="@dimen/activity_horizontal_margin"
             app:cardPreventCornerOverlap="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/social"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/card_view"
             card_view:cardCornerRadius="25dp">
@@ -246,7 +196,35 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gomapDetail"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="16dp"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="271dp">
+
+                    <TextView
+                        android:id="@+id/categoryJour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:fontFamily="@font/autour_one"
+                        android:gravity="center"
+                        android:text="Plat du jour"
+                        android:textColor="@color/colorgreen"
+                        android:textSize="18sp"
+                        card_view:layout_editor_absoluteX="79dp"
+                        card_view:layout_editor_absoluteY="190dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/dujourDetailJour"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
@@ -259,21 +237,21 @@
                     <com.joanzapata.iconify.widget.IconTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="{ion-map}"
+                        android:padding="3dp"
+                        android:text="{ion-fireball}"
                         android:textColor="@color/colorRose"
                         android:textSize="30dp" />
 
                     <TextView
-                        android:id="@+id/adresseDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="3"
                         android:fontFamily="@font/autour_one"
-                        android:text="Alger, belfort"
+                        android:text="Plat du jour"
                         android:textColor="@color/colorDark"
                         android:textSize="15sp"
                         card_view:layout_editor_absoluteX="79dp"
@@ -281,9 +259,9 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/vegetarienDetailjour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/gophoneDetail"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
                     android:background="?attr/selectableItemBackground"
@@ -296,22 +274,22 @@
                     <com.joanzapata.iconify.widget.IconTextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
+                        android:layout_margin="2dp"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="{ion-ios-telephone}"
-                        android:textColor="@color/colorRose"
+                        android:padding="3dp"
+                        android:text="{ion-leaf}"
+                        android:textColor="@color/colorgreen"
                         android:textSize="30dp" />
 
                     <TextView
-                        android:id="@+id/telDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="3"
                         android:clickable="true"
                         android:fontFamily="@font/autour_one"
-                        android:text="Alger, belfort"
+                        android:text="Végétarien"
                         android:textColor="@color/colorDark"
                         android:textSize="15sp"
                         card_view:layout_editor_absoluteX="79dp"
@@ -319,11 +297,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/diabetiqueDetailJour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:id="@+id/gomailDetail"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="horizontal"
@@ -337,18 +315,18 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="{ion-email}"
+                        android:text="{ion-ios-circle-outline}"
                         android:textColor="@color/colorRose"
                         android:textSize="30dp" />
 
                     <TextView
-                        android:id="@+id/mailDetail"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="3"
                         android:fontFamily="@font/autour_one"
-                        android:text="Alger, belfort"
+                        android:text="Plat pour Diabétique"
                         android:textColor="@color/colorDark"
                         android:textSize="15sp"
                         card_view:layout_editor_absoluteX="79dp"
@@ -356,11 +334,11 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/binaireDetailjour"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:id="@+id/goplateDetail"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
                     android:orientation="horizontal"
@@ -374,89 +352,25 @@
                         android:layout_gravity="center"
                         android:layout_weight="1"
                         android:gravity="center"
-                        android:text="{ion-android-restaurant}"
+                        android:text="{ion-pricetags}"
                         android:textColor="@color/colorRose"
                         android:textSize="30dp" />
 
                     <TextView
-                        android:id="@+id/seeMoreDetail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_weight="1.5"
+                        android:layout_weight="3"
                         android:fontFamily="@font/autour_one"
-                        android:text=" Voir les plats .."
+                        android:text="Plat binaire"
                         android:textColor="@color/colorDark"
                         android:textSize="15sp"
                         android:textStyle="italic"
                         card_view:layout_editor_absoluteX="79dp"
                         card_view:layout_editor_absoluteY="190dp" />
-
-                    <com.joanzapata.iconify.widget.IconTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="{ion-arrow-right-c}"
-                        android:textColor="@color/colorRose"
-                        android:textSize="30dp" />
                 </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
-        <LinearLayout
-            android:id="@+id/social"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:layout_marginTop="8dp"
-            android:orientation="horizontal"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card2">
-
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/facebookDetail"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="start"
-                android:layout_margin="5dp"
-                android:background="@drawable/socialclick"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="{fa-facebook-f}"
-                android:textColor="@color/background"
-                android:textSize="30dp" />
-
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/instagramDetail"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="start"
-                android:layout_margin="5dp"
-                android:background="@drawable/socialclick"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="{ion-social-instagram}"
-                android:textColor="@color/background"
-                android:textSize="30dp" />
-
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/twitterDetail"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_gravity="end"
-                android:layout_margin="5dp"
-                android:background="@drawable/socialclick"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="{ion-social-twitter}"
-                android:textColor="@color/background"
-                android:textSize="30dp" />
-
-        </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 </ScrollView>

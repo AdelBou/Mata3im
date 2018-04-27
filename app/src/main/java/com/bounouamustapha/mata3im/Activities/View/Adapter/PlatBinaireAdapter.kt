@@ -10,51 +10,46 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bounouamustapha.mata3im.Activities.Controller.Util
 import com.bounouamustapha.mata3im.Activities.Controller.Utils.OnPlatClickListner
-import com.bounouamustapha.mata3im.Activities.Model.Plat
+import com.bounouamustapha.mata3im.Activities.Model.PlatBinaire
 import com.bounouamustapha.mata3im.R
 import com.joanzapata.iconify.widget.IconTextView
 
 /**
  * Created by bounouamustapha on 4/1/18.
  */
-class PlatsAdapter(var c :Context, var listPlats: List<Plat>, var listener: OnPlatClickListner) : RecyclerView.Adapter<PlatsAdapter.ViewHolder>() {
+class PlatBinaireAdapter(var c :Context, var listBinairePlats: List<PlatBinaire>, var listener: OnPlatClickListner) : RecyclerView.Adapter<PlatBinaireAdapter.ViewHolder>() {
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder?.txtName?.text = listPlats[position].name
-        holder?.image?.setImageResource(listPlats[position].listImage)
-        holder?.price?.text="${listPlats[position].prix}"+"{ion-social-usd}";
-        holder?.bind(c,listPlats.get(position), listener)
+        holder?.txtName?.text = listBinairePlats[position].plat1.name +" "+listBinairePlats[position].plat2.name
+        holder?.image1?.setImageResource(listBinairePlats[position].plat1.listImage)
+        holder?.image2?.setImageResource(listBinairePlats[position].plat2.listImage)
+        holder?.category?.text = listBinairePlats[position].plat1.type +" + "+listBinairePlats[position].plat2.type
+        holder?.price?.text="${listBinairePlats[position].price}"+"{ion-social-usd}";
+        holder?.bind(c, listBinairePlats.get(position), listener)
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_plat, parent, false)
+        val v = LayoutInflater.from(parent?.context).inflate(R.layout.item_plat_binaire, parent, false)
         return ViewHolder(v)
     }
 
     override fun getItemCount(): Int {
-        return listPlats.size
+        return listBinairePlats.size
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val txtName = itemView.findViewById<TextView>(R.id.namePlat)
-        val buy = itemView.findViewById<IconTextView>(R.id.buyPlat)
-        var bookmark=itemView.findViewById<IconTextView>(R.id.bookmark)
-        var cart=itemView.findViewById<IconTextView>(R.id.addCart)
-        val image=itemView.findViewById<ImageView>(R.id.imagelistPlat)
-        var price=itemView.findViewById<IconTextView>(R.id.price)
-        var dujour=itemView.findViewById<IconTextView>(R.id.dujour)
-        var vegetarien=itemView.findViewById<IconTextView>(R.id.vegetarien)
-        var diabetique=itemView.findViewById<IconTextView>(R.id.diabetique)
-
-        fun bind(c:Context, item: Plat, listener: OnPlatClickListner) {
-            if (!item.dujour) dujour.visibility=View.GONE
-            if (!item.vegetarien) vegetarien.visibility=View.GONE
-            if (!item.diabetique) diabetique.visibility=View.GONE
-
-            image.setOnClickListener{listener.onItemClick(item)}
-            txtName.setOnClickListener{listener.onItemClick(item)}
-
+        val txtName = itemView.findViewById<TextView>(R.id.namePlatBinaire)
+        val category = itemView.findViewById<TextView>(R.id.typeBinaire)
+        val buy = itemView.findViewById<IconTextView>(R.id.buyPlatBinaire)
+        var bookmark=itemView.findViewById<IconTextView>(R.id.bookmarkBinaire)
+        var cart=itemView.findViewById<IconTextView>(R.id.addCartBinaire)
+        val image1=itemView.findViewById<ImageView>(R.id.image1)
+        val image2=itemView.findViewById<ImageView>(R.id.image2)
+        var price=itemView.findViewById<IconTextView>(R.id.priceBinaire)
+        fun bind(c:Context, item: PlatBinaire, listener: OnPlatClickListner) {
+            image1.setOnClickListener{listener.onItemClick(item.plat1)}
+            image2.setOnClickListener{listener.onItemClick(item.plat2)}
             if (item.bookmark) {
                 bookmark.setTextColor(c.getResources().getColor(R.color.colorRose))
             }
@@ -87,7 +82,7 @@ class PlatsAdapter(var c :Context, var listPlats: List<Plat>, var listener: OnPl
                 item.cart = !item.cart
                 if (item.cart) {
                     cart.setTextColor(c.getResources().getColor(R.color.colorRose))
-                    Util.showCart(c as Activity,item.name)
+                    Util.showCart(c as Activity,item.plat1.name+" + "+item.plat2.name)
                 }
                 else
                 {
@@ -95,7 +90,7 @@ class PlatsAdapter(var c :Context, var listPlats: List<Plat>, var listener: OnPl
                 }
             })
             buy.setOnClickListener({
-                Util.showBuy(c as Activity,item.name)
+                Util.showBuy(c as Activity,item.plat1.name+" + "+item.plat2.name)
             })
         }
     }

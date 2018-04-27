@@ -18,7 +18,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/imagelistPlat"
+            android:id="@+id/panierImage"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:paddingBottom="0dp"
@@ -38,7 +38,7 @@
             app:layout_constraintGuide_begin="144dp" />
 
         <TextView
-            android:id="@+id/namePlat"
+            android:id="@+id/namePlatPanier"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="#66000000"
@@ -63,7 +63,7 @@
             app:layout_constraintGuide_begin="55dp" />
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/price"
+            android:id="@+id/pricePanier"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
@@ -83,53 +83,43 @@
 
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/buyPlat"
+            android:id="@+id/confirmer"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/iconincardclick"
             android:clickable="true"
             android:gravity="center"
             android:text="{fa-credit-card}"
             android:textColor="@color/colorgreen"
             android:textSize="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imagelistPlat"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3Plat"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3Plat" />
 
 
         <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/bookmark"
+            android:id="@+id/delete"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:background="@drawable/iconincardclick"
             android:clickable="true"
             android:gravity="center"
             android:text="{ion-star}"
             android:textColor="@color/colorRose"
             android:textSize="24dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imagelistPlat"
-            app:layout_constraintEnd_toStartOf="@+id/buyPlat"
+            app:layout_constraintBottom_toTopOf="@+id/guideline3Plat"
+            app:layout_constraintEnd_toStartOf="@+id/confirmer"
             app:layout_constraintTop_toTopOf="@+id/guideline3Plat" />
 
-        <com.joanzapata.iconify.widget.IconTextView
-            android:id="@+id/addCart"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/iconincardclick"
-            android:clickable="true"
-            android:gravity="center"
-            android:text="{ion-ios-cart}"
-            android:textColor="@color/colorRose"
-            android:textSize="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/guideline3Plat"
-            app:layout_constraintEnd_toStartOf="@+id/bookmark"
-            app:layout_constraintTop_toTopOf="@+id/guideline3Plat" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:gravity="start|center"
             android:paddingBottom="0dp"
             android:layout_marginTop="20dp"
             android:orientation="horizontal"
@@ -137,40 +127,39 @@
             app:layout_constraintEnd_toStartOf="@+id/buyPlat"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline3Plat">
+            <com.joanzapata.iconify.widget.IconTextView
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:clickable="true"
+                android:layout_marginRight="5dp"
+                android:gravity="center"
+                android:text="{ion-android-restaurant}"
+                android:textColor="@color/colorRose"
+                android:textSize="30dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_weight="1"
+                android:text="Nombre de plats: "/>
+            <TextView
+                android:id="@+id/nbPlat"
+                android:layout_weight="0.5"
+                android:textSize="15sp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="22"/>
 
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/dujour"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_margin="2dp"
-                android:background="@drawable/badg_rose"
+            <TextView
+                android:id="@+id/restaurant"
+                android:layout_weight="2"
+                android:textSize="13sp"
+                android:textColor="@color/colorgreen"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:gravity="center"
-                android:padding="3dp"
-                android:text="{ion-fireball}"
-                android:textColor="@color/background"
-                android:textSize="14sp" />
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/vegetarien"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/badg_green"
-                android:gravity="center"
-                android:layout_margin="2dp"
-                android:padding="3dp"
-                android:text="{ion-leaf}"
-                android:textColor="@color/background"
-                android:textSize="14sp" />
-            <com.joanzapata.iconify.widget.IconTextView
-                android:id="@+id/diabetique"
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:background="@drawable/badg_rose"
-                android:gravity="center"
-                android:padding="3dp"
-                android:layout_margin="2dp"
-                android:text="{fa-plus}"
-                android:textColor="@color/background"
-                android:textSize="14sp" />
+                android:text="resteau" />
         </LinearLayout>
     </android.support.constraint.ConstraintLayout>
 
